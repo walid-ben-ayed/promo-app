@@ -1,0 +1,7 @@
+com\promo\domain\model\Promotion$PromotionBuilder.class
+com\promo\domain\port\UserRepository.class
+com\promo\domain\model\Promotion.class
+com\promo\domain\model\User.class
+com\promo\domain\port\PromotionRepository.class
+com\promo\domain\model\UserRole.class
+com\promo\domain\model\User$UserBuilder.class
