@@ -1,0 +1,56 @@
+services:
+
+  db:
+    image: mysql:8.3
+    container_name: promo-db
+    environment:
+      MYSQL_ROOT_PASSWORD: "walidA31+"
+      MYSQL_DATABASE: promodb
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-pwalidA31+"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./promo-backend
+    container_name: promo-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: promodb
+      DB_USER: root
+      DB_PASSWORD: "walidA31+"
+      JWT_SECRET: mySecretKeyForJWTTokenGenerationThatIsLongEnough
+    ports:
+      - "8080:8080"
+
+  frontend:
+    build: ./promo-frontend
+    container_name: promo-frontend
+    depends_on:
+      - backend
+    ports:
+      - "8081:8081"
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: promo-phpmyadmin
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: "walidA31+"
+    ports:
+      - "8082:80"
+
+volumes:
+  db_data:
