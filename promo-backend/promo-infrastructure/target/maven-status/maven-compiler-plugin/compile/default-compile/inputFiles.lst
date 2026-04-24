@@ -1,8 +1,0 @@
-D:\app promo\promo-backend\promo-infrastructure\src\main\java\com\promo\infrastructure\mapper\UserMapper.java
-D:\app promo\promo-backend\promo-infrastructure\src\main\java\com\promo\infrastructure\entity\UserEntity.java
-D:\app promo\promo-backend\promo-infrastructure\src\main\java\com\promo\infrastructure\repository\JpaPromotionRepository.java
-D:\app promo\promo-backend\promo-infrastructure\src\main\java\com\promo\infrastructure\adapter\PromotionRepositoryAdapter.java
-D:\app promo\promo-backend\promo-infrastructure\src\main\java\com\promo\infrastructure\adapter\UserRepositoryAdapter.java
-D:\app promo\promo-backend\promo-infrastructure\src\main\java\com\promo\infrastructure\repository\JpaUserRepository.java
-D:\app promo\promo-backend\promo-infrastructure\src\main\java\com\promo\infrastructure\entity\PromotionEntity.java
-D:\app promo\promo-backend\promo-infrastructure\src\main\java\com\promo\infrastructure\mapper\PromotionMapper.java

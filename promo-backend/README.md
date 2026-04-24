@@ -1,58 +1,60 @@
-# Promo Backend - Spring Boot
+# Promo Backend - Architecture Simple
 
-## Architecture
+## 📁 Structure du Projet
 
-Ce projet utilise une **architecture hexagonale** (ports & adapters) avec une séparation claire des responsabilités :
+```
+promo-backend-simple/
+├── src/main/java/com/promo/
+│   ├── PromoApplication.java       # Point d'entrée
+│   ├── entity/                     # Entités JPA
+│   │   ├── User.java
+│   │   ├── Promotion.java
+│   │   └── UserRole.java
+│   ├── repository/                 # Repositories Spring Data
+│   │   ├── UserRepository.java
+│   │   └── PromotionRepository.java
+│   ├── service/                    # Logique métier
+│   │   ├── AuthService.java
+│   │   └── PromotionService.java
+│   ├── controller/                 # API REST
+│   │   ├── AuthController.java
+│   │   └── PromotionController.java
+│   ├── dto/                        # Data Transfer Objects
+│   │   ├── LoginRequest.java
+│   │   ├── RegisterRequest.java
+│   │   ├── AuthResponse.java
+│   │   ├── PromotionRequest.java
+│   │   └── PromotionResponse.java
+│   ├── config/                     # Configuration
+│   │   └── SecurityConfig.java
+│   └── security/                   # Sécurité JWT
+│       └── JwtService.java
+└── src/main/resources/
+    └── application.properties      # Configuration
 
-### Modules
+## 🚀 Démarrage
 
-- **promo-domain** : Modèles métier et ports (interfaces)
-- **promo-application** : Services métier et cas d'usage
-- **promo-infrastructure** : Implémentation des adapters (JPA, repositories)
-- **promo-api** : Contrôleurs REST et configuration Spring Boot
-
-## Technologies
-
-- Java 17
-- Spring Boot 3.2.0
-- Spring Data JPA
-- Spring Security + JWT
-- MySQL 8.0+
-- Lombok
-- MapStruct
-- Maven
-
-## Prérequis
-
-- JDK 17+
-- Maven 3.8+
-- MySQL 8.0+
-
-## Configuration
-
-La base de données sera créée automatiquement au démarrage.
-
-Configuration actuelle :
-- Host: localhost
-- Port: 3306
-- Database: promodb
-- Username: root
-- Password: walidA31+
-
-Pour modifier, éditez `promo-api/src/main/resources/application.yml`
-
-## Démarrage
-
+### 1. Compiler le projet
 ```bash
-cd promo-backend
+cd promo-backend-simple
 mvn clean install
-cd promo-api
+```
+
+### 2. Lancer l'application
+```bash
 mvn spring-boot:run
 ```
 
-L'API sera disponible sur `http://localhost:8080`
+Ou dans IntelliJ : Run `PromoApplication.java`
 
-## Endpoints
+## 📝 Configuration
+
+Modifiez `application.properties` pour vos paramètres :
+- Base de données MySQL
+- Port du serveur
+- JWT secret et expiration
+
+## 🔗 Endpoints API
 
 ### Authentification
 - POST `/api/auth/register` - Inscription
@@ -66,3 +68,12 @@ L'API sera disponible sur `http://localhost:8080`
 - POST `/api/promotions` - Créer une promotion
 - PUT `/api/promotions/{id}` - Modifier une promotion
 - DELETE `/api/promotions/{id}` - Supprimer une promotion
+
+## 🎯 Avantages de cette architecture
+
+1. **Simple** - Un seul module, facile à comprendre
+2. **Clair** - Chaque package a un rôle précis
+3. **Maintenable** - Facile à modifier et déboguer
+4. **Professionnel** - Suit les bonnes pratiques Spring Boot
+5. **Évolutif** - Facile d'ajouter de nouvelles fonctionnalités
+6. **Compatible** - Fonctionne avec toutes les versions de Spring Boot

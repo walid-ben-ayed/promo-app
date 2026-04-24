@@ -38,6 +38,30 @@ dev_dependencies:
   build_runner: ^2.4.7
   json_serializable: ^6.7.1
   injectable_generator: ^2.4.1
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.5
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/icon/
+
+flutter_launcher_icons:
+  android: true
+  ios: false
+  image_path: "assets/icon/app_icon.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/icon/app_icon.png"
+  min_sdk_android: 21
+  # Désactiver le recadrage pour voir l'image complète
+  remove_alpha_ios: true
+
+flutter_native_splash:
+  color: "#FFFC00"
+  image: assets/icon/app_icon.png
+  android: true
+  ios: false
+  android_12:
+    color: "#FFFC00"
+    image: assets/icon/app_icon.png
+  fullscreen: true

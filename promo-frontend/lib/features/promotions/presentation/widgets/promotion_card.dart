@@ -11,9 +11,18 @@ class PromotionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currencyFormat = NumberFormat.currency(symbol: '€');
+    final screenWidth = MediaQuery.of(context).size.width;
+    
+    // Adapter la hauteur de l'image selon la taille de l'écran
+    final imageHeight = screenWidth > 600 ? 250.0 : 200.0;
+    final titleFontSize = screenWidth > 600 ? 20.0 : 18.0;
 
     return Card(
       margin: const EdgeInsets.only(bottom: 16),
+      elevation: 2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -22,23 +31,23 @@ class PromotionCard extends StatelessWidget {
               borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
               child: CachedNetworkImage(
                 imageUrl: promotion.imageUrl!,
-                height: 200,
+                height: imageHeight,
                 width: double.infinity,
                 fit: BoxFit.cover,
                 placeholder: (context, url) => Container(
-                  height: 200,
+                  height: imageHeight,
                   color: Colors.grey[300],
                   child: const Center(child: CircularProgressIndicator()),
                 ),
                 errorWidget: (context, url, error) => Container(
-                  height: 200,
+                  height: imageHeight,
                   color: Colors.grey[300],
-                  child: const Icon(Icons.error),
+                  child: const Icon(Icons.error, size: 50),
                 ),
               ),
             ),
           Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(screenWidth > 600 ? 20.0 : 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -47,7 +56,10 @@ class PromotionCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         promotion.title,
-                        style: Theme.of(context).textTheme.titleLarge,
+                        style: TextStyle(
+                          fontSize: titleFontSize,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Container(
@@ -77,20 +89,22 @@ class PromotionCard extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 12),
-                Row(
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 4,
                   children: [
                     Text(
                       currencyFormat.format(promotion.originalPrice),
-                      style: const TextStyle(
+                      style: TextStyle(
                         decoration: TextDecoration.lineThrough,
                         color: Colors.grey,
+                        fontSize: screenWidth > 600 ? 16 : 14,
                       ),
                     ),
-                    const SizedBox(width: 8),
                     Text(
                       currencyFormat.format(promotion.discountedPrice),
-                      style: const TextStyle(
-                        fontSize: 20,
+                      style: TextStyle(
+                        fontSize: screenWidth > 600 ? 24 : 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.green,
                       ),
@@ -98,20 +112,34 @@ class PromotionCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 8),
-                Row(
+                Wrap(
+                  spacing: 16,
+                  runSpacing: 8,
                   children: [
-                    Icon(Icons.store, size: 16, color: Colors.grey[600]),
-                    const SizedBox(width: 4),
-                    Text(
-                      promotion.merchantName,
-                      style: TextStyle(color: Colors.grey[600]),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.store, size: 16, color: Colors.grey[600]),
+                        const SizedBox(width: 4),
+                        Flexible(
+                          child: Text(
+                            promotion.merchantName,
+                            style: TextStyle(color: Colors.grey[600]),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
                     ),
-                    const Spacer(),
-                    Icon(Icons.category, size: 16, color: Colors.grey[600]),
-                    const SizedBox(width: 4),
-                    Text(
-                      promotion.category,
-                      style: TextStyle(color: Colors.grey[600]),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(Icons.category, size: 16, color: Colors.grey[600]),
+                        const SizedBox(width: 4),
+                        Text(
+                          promotion.category,
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -5,6 +5,7 @@ import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/promotions/presentation/bloc/promotion_bloc.dart';
 import 'features/auth/presentation/pages/login_page.dart';
 import 'features/promotions/presentation/pages/promotions_page.dart';
+import 'features/splash/presentation/pages/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,20 +24,18 @@ class PromoApp extends StatelessWidget {
         BlocProvider(create: (_) => getIt<PromotionBloc>()..add(LoadPromotions())),
       ],
       child: MaterialApp(
-        title: 'Promo App',
+        title: 'Promo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: BlocBuilder<AuthBloc, AuthState>(
-          builder: (context, state) {
-            if (state is Authenticated) {
-              return const PromotionsPage();
-            }
-            return const LoginPage();
-          },
-        ),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const SplashScreen(),
+          '/login': (context) => const LoginPage(),
+          '/promotions': (context) => const PromotionsPage(),
+        },
       ),
     );
   }
