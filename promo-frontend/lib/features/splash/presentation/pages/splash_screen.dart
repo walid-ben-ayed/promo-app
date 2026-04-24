@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:math';
+import '../../../home/presentation/pages/home_page.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -61,10 +62,12 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         });
       } else {
         timer.cancel();
-        // Attendre 1 seconde puis naviguer vers la page de login
+        // Attendre 1 seconde puis naviguer vers la page d'accueil
         Future.delayed(const Duration(milliseconds: 1000), () {
           if (mounted) {
-            Navigator.of(context).pushReplacementNamed('/login');
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => const HomePage()),
+            );
           }
         });
       }

@@ -6,6 +6,7 @@ import 'features/promotions/presentation/bloc/promotion_bloc.dart';
 import 'features/auth/presentation/pages/login_page.dart';
 import 'features/promotions/presentation/pages/promotions_page.dart';
 import 'features/splash/presentation/pages/splash_screen.dart';
+import 'features/home/presentation/pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,6 +34,7 @@ class PromoApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => const SplashScreen(),
+          '/home': (context) => const HomePage(),
           '/login': (context) => const LoginPage(),
           '/promotions': (context) => const PromotionsPage(),
         },
